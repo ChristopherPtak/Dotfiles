@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+# Load GHCUp if it is present
+if [ -f "$HOME/.ghcup/env" ]
+then
+  source "$HOME/.ghcup/env"
+fi
+
+

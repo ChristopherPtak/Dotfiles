@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+# Use directory colors
+eval "$(dircolors -b)"
+
+# Some aliases
+alias ls='ls --color=auto'
+
