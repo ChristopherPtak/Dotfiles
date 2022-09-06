@@ -35,6 +35,7 @@ install_file ".zshrc.d/00_prompt"     "$HOME/.zshrc.d/00_prompt"
 install_file ".zshrc.d/01_history"    "$HOME/.zshrc.d/01_history"
 install_file ".zshrc.d/02_completion" "$HOME/.zshrc.d/02_completion"
 install_file ".zshrc.d/03_colors"     "$HOME/.zshrc.d/03_colors"
+install_file ".zshrc.d/10_ghcup"      "$HOME/.zshrc.d/10_ghcup"
 
 # Update shell
 if [ "$SHELL" != "/bin/zsh" ]
