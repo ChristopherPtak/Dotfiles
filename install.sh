@@ -29,23 +29,34 @@ make_directory ()
   fi
 }
 
+
 # Install vim configuration
-install_file ".vimrc" "$HOME/.vimrc"
-
-# Install zsh configuration
-make_directory "$HOME/.zshrc.d"
-install_file ".zshrc"                 "$HOME/.zshrc"
-install_file ".zshrc.d/00_prompt"     "$HOME/.zshrc.d/00_prompt"
-install_file ".zshrc.d/01_history"    "$HOME/.zshrc.d/01_history"
-install_file ".zshrc.d/02_completion" "$HOME/.zshrc.d/02_completion"
-install_file ".zshrc.d/03_colors"     "$HOME/.zshrc.d/03_colors"
-install_file ".zshrc.d/10_ghcup"      "$HOME/.zshrc.d/10_ghcup"
-
-# Update shell
-if [ "$SHELL" != "/bin/zsh" ]
+if [ -f "/bin/vim" ]
 then
-  echo 'Setting shell to /bin/zsh'
-  chsh -s /bin/zsh
+  install_file ".vimrc" "$HOME/.vimrc"
+else
+  echo 'Vim not installed, skipping'
+fi
+
+if [ -f "/bin/zsh" ]
+then
+  # Install zsh configuration
+  make_directory "$HOME/.zshrc.d"
+  install_file ".zshrc"                 "$HOME/.zshrc"
+  install_file ".zshrc.d/00_prompt"     "$HOME/.zshrc.d/00_prompt"
+  install_file ".zshrc.d/01_history"    "$HOME/.zshrc.d/01_history"
+  install_file ".zshrc.d/02_completion" "$HOME/.zshrc.d/02_completion"
+  install_file ".zshrc.d/03_colors"     "$HOME/.zshrc.d/03_colors"
+  install_file ".zshrc.d/10_ghcup"      "$HOME/.zshrc.d/10_ghcup"
+
+  # Update shell
+  if [ "$SHELL" != "/bin/zsh" ]
+  then
+    echo 'Setting shell to /bin/zsh'
+    chsh -s /bin/zsh
+  fi
+else
+  echo 'Zsh not installed, skipping'
 fi
 
 
