@@ -2,6 +2,8 @@
 
 set -e
 
+changed=0
+
 install_file ()
 {
   src_file="$1"
@@ -11,6 +13,7 @@ install_file ()
   then
     echo "Copying $src_file -> $dest_file"
     cp "$src_file" "$dest_file"
+    changed=1
   fi
 }
 
@@ -22,6 +25,7 @@ make_directory ()
   then
     echo "Creating directory $directory"
     mkdir -p "$directory"
+    changed=1
   fi
 }
 
@@ -40,8 +44,13 @@ install_file ".zshrc.d/10_ghcup"      "$HOME/.zshrc.d/10_ghcup"
 # Update shell
 if [ "$SHELL" != "/bin/zsh" ]
 then
-    echo 'Setting shell to /bin/zsh'
-    chsh -s /bin/zsh
+  echo 'Setting shell to /bin/zsh'
+  chsh -s /bin/zsh
 fi
 
+
+if [ "$changed" != 1 ]
+then
+  echo 'No changes made'
+fi
 
