@@ -2,5 +2,5 @@
 
 # Set the interactive prompt
 PS1='%B%n%b@%B%m%b> '
-RPS1="[%?] %f%F{blue}%~%f"
+RPS1='%F{red}%(?..[%?] )%F{blue}%~%f'
 
