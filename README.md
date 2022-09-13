@@ -9,7 +9,7 @@ on new machines, or updates it when changes are made.
 
 # Installation
 
-1. Run `sh install.sh`
+1. Run `./install.sh`
 
 2. Make sure to restart the shell, for example by `exec zsh`
 

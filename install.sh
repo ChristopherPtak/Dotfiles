@@ -30,6 +30,14 @@ make_directory ()
 }
 
 
+# Install GHCi configuration
+if [ -d "$HOME/.ghcup" ]
+then
+  install_file ".ghci" "$HOME/.ghci"
+else
+  echo 'GHC not installed, skipping'
+fi
+
 # Install vim configuration
 if [ -f "/bin/vim" ]
 then
