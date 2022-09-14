@@ -17,7 +17,7 @@ install_file ()
   fi
 }
 
-make_directory ()
+require_dir ()
 {
   directory="$1"
 
@@ -49,7 +49,7 @@ fi
 if [ -f "/bin/zsh" ]
 then
   # Install zsh configuration
-  make_directory "$HOME/.zshrc.d"
+  require_dir "$HOME/.zshrc.d"
   install_file ".zshrc"                 "$HOME/.zshrc"
   install_file ".zshrc.d/00_prompt"     "$HOME/.zshrc.d/00_prompt"
   install_file ".zshrc.d/01_history"    "$HOME/.zshrc.d/01_history"
@@ -70,7 +70,7 @@ fi
 # Install git plugins
 if [ -f "/usr/bin/git" ]
 then
-  make_directory "$HOME/.local/bin"
+  require_dir "$HOME/.local/bin"
   install_file ".local/bin/git-amend" "$HOME/.local/bin/git-amend"
 else
   echo 'Git not installed, skipping'
