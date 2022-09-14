@@ -67,6 +67,15 @@ else
   echo 'Zsh not installed, skipping'
 fi
 
+# Install git plugins
+if [ -f "/usr/bin/git" ]
+then
+  make_directory "$HOME/.local/bin"
+  install_file ".local/bin/git-amend" "$HOME/.local/bin/git-amend"
+else
+  echo 'Git not installed, skipping'
+fi
+
 
 if [ "$changed" != 1 ]
 then
