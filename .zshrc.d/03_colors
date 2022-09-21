@@ -5,4 +5,5 @@ eval "$(dircolors -b)"
 
 # Some aliases
 alias ls='ls --color=auto'
+alias tree='tree -C'
 
