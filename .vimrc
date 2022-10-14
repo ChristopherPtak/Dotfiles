@@ -13,9 +13,11 @@ set whichwrap=h,l
 set tabstop=8 expandtab
 
 " Specialize indent by file type
-autocmd FileType python setlocal tabstop=4 expandtab
-autocmd FileType rust   setlocal tabstop=4 expandtab
-autocmd FileType scheme setlocal tabstop=2 expandtab
+autocmd FileType python     setlocal tabstop=4 expandtab
+autocmd FileType rust       setlocal tabstop=4 expandtab
+autocmd FileType scheme     setlocal tabstop=2 expandtab
+autocmd FileType html       setlocal tabstop=2 expandtab
+autocmd FileType javascript setlocal tabstop=2 expandtab
 
 " Enable line numbering
 set number
