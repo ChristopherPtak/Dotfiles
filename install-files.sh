@@ -7,7 +7,7 @@ changed=0
 install_file ()
 {
   src_file="$1"
-  dest_file="$2"
+  dest_file="${HOME}/$1"
 
   if ! cmp -s "$src_file" "$dest_file"
   then
@@ -33,7 +33,7 @@ require_dir ()
 # Install GHCi configuration
 if [ -d "$HOME/.ghcup" ]
 then
-  install_file ".ghci" "$HOME/.ghci"
+  install_file ".ghci"
 else
   echo 'GHC not installed, skipping'
 fi
@@ -41,7 +41,7 @@ fi
 # Install vim configuration
 if [ -f "/bin/vim" ]
 then
-  install_file ".vimrc" "$HOME/.vimrc"
+  install_file ".vimrc"
 else
   echo 'Vim not installed, skipping'
 fi
@@ -50,13 +50,13 @@ if [ -f "/bin/zsh" ]
 then
   # Install zsh configuration
   require_dir "$HOME/.zshrc.d"
-  install_file ".zshrc"                 "$HOME/.zshrc"
-  install_file ".zshrc.d/00_prompt"     "$HOME/.zshrc.d/00_prompt"
-  install_file ".zshrc.d/01_history"    "$HOME/.zshrc.d/01_history"
-  install_file ".zshrc.d/02_completion" "$HOME/.zshrc.d/02_completion"
-  install_file ".zshrc.d/03_colors"     "$HOME/.zshrc.d/03_colors"
-  install_file ".zshrc.d/04_path"       "$HOME/.zshrc.d/04_path"
-  install_file ".zshrc.d/10_ghcup"      "$HOME/.zshrc.d/10_ghcup"
+  install_file ".zshrc"
+  install_file ".zshrc.d/00_prompt"
+  install_file ".zshrc.d/01_history"
+  install_file ".zshrc.d/02_completion"
+  install_file ".zshrc.d/03_colors"
+  install_file ".zshrc.d/04_path"
+  install_file ".zshrc.d/10_ghcup"
 
   # Update shell
   if [ "$SHELL" != "/bin/zsh" ]
@@ -68,11 +68,11 @@ else
   echo 'Zsh not installed, skipping'
 fi
 
-# Install git plugins
+# Configure Git and install plugins
 if [ -f "/usr/bin/git" ]
 then
   require_dir "$HOME/.local/bin"
-  install_file ".local/bin/git-amend" "$HOME/.local/bin/git-amend"
+  install_file ".local/bin/git-amend"
 else
   echo 'Git not installed, skipping'
 fi
