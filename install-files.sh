@@ -57,6 +57,12 @@ then
   install_file ".zshrc.d/03_colors"
   install_file ".zshrc.d/04_path"
   install_file ".zshrc.d/10_ghcup"
+  if [ -f "/bin/command-not-found" ]
+  then
+    install_file ".zshrc.d/20_command_not_found"
+  else
+    echo 'Command-Not-Found not installed, skipping'
+  fi
 
   # Update shell
   if [ "$SHELL" != "/bin/zsh" ]
