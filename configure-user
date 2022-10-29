@@ -77,6 +77,10 @@ fi
 # Configure Git and install plugins
 if [ -f "/usr/bin/git" ]
 then
+  # Main configuration
+  install_file ".gitconfig"
+
+  # Plugins
   require_dir "$HOME/.local/bin"
   install_file ".local/bin/git-amend"
 else
