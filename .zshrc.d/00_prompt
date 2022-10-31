@@ -1,5 +1,48 @@
 #!/bin/zsh
 
-# Set the interactive prompt
-PS1='%B%n%b@%B%m%b> '
-RPS1='%B%F{red}%(?..(%?%) )%F{blue}%~%f%b'
+function ()
+{
+  # Determine which prompt style to use
+  # based on terminal name
+  fancy=
+  case "$TERM" in
+    konsole) fancy=1;;
+  esac
+
+  if [ -n "$fancy" ]
+  then
+    right=$(echo '\uE0B0')        # Right facing arrow
+    left=$(echo '\uE0B2')         # Left facing arrow
+    bar=$(echo '\u2502')          # Vertical bar
+    light="#D0D0D0"               # "Light" color
+    dark="#343434"                # Dark color
+
+    PS1=
+    PS1+="%K{$dark}%F{$light}"    # Set light-on-dark colors
+    PS1+="%B%n%b@%B%m%b"          # Show user@hostname
+    PS1+="%f%k"                   # End colors
+    PS1+="%F{$dark}$right%f "     # Dark colored right arrow
+
+    RPS1=
+    RPS1+="%F{$dark}$left%f"      # Dark colored left arrow
+    RPS1+="%K{$dark}%F{$light}"   # Set dark-on-light colors
+    RPS1+="%(?.."                 # Start conditional (nonzero exit code)
+    RPS1+="%B%F{red}%?%f%b"       #   Show exit code in red
+    RPS1+=" %F{$light}$bar%f "    #   Vertical bar spacer
+    RPS1+=")"                     # End conditional
+    RPS1+="%B%F{blue}%~ %f%b"     # Show current directory
+    RPS1+="%f%k"                  # End colors
+  else
+    PS1=
+    PS1+="%B%n%b@%B%m%b"          # Show user@hostname
+    PS1+="> "                     # Right arrow
+
+    RPS1=
+    RPS1+="%(?.."                 # Start conditional (nonzero exit code)
+    RPS1+="%B%F{red}%?%f%b"       #   Show exit code in red
+    RPS1+=" | "                   #   Vertical bar spacer
+    RPS1+=")"                     # End conditional
+    RPS1+="%B%F{blue}%~%f%b"      # Show current directory
+  fi
+}
+
