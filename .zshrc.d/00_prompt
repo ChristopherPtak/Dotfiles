@@ -1,49 +1,119 @@
 #!/bin/zsh
 
-function ()
+##
+## Fancy prompt
+##
+
+prompt_fg='#C2C2BC'
+prompt_bg='#414359'
+prompt_mg='#8D8D8D'
+
+prompt_dir='#3DAEE9'
+prompt_err='#E11A1A'
+prompt_ok='#16A085'
+
+prompt_l_begin ()
 {
-  # Determine which prompt style to use
-  # based on terminal name
-  fancy=
-  case "$TERM" in
-    konsole) fancy=1;;
-  esac
-
-  if [ -n "$fancy" ]
-  then
-    right=$(echo '\uE0B0')        # Right facing arrow
-    left=$(echo '\uE0B2')         # Left facing arrow
-    bar=$(echo '\u2502')          # Vertical bar
-    fore="#DFDFD4"                # Foreground color
-    middle="#888888"              # Middleground color
-    back="#404454"                # Background color
-
-    PS1=
-    PS1+="%K{$back}%F{$fore}"     # colors
-    PS1+="%B%n%b@%B%m%b"          # Show user@hostname
-    PS1+="%f%k"                   # End colors
-    PS1+="%F{$back}$right%f "     # Colored right arrow
-
-    RPS1=
-    RPS1+="%F{$back}$left%f"      # Colored left arrow
-    RPS1+="%K{$back}%F{$fore}"    # Set colors
-    RPS1+="%(?.."                 # Start conditional (nonzero exit code)
-    RPS1+="%B%F{red}%?%f%b"       #   Show exit code in red
-    RPS1+=" %F{$middle}$bar%f "   #   Vertical bar spacer
-    RPS1+=")"                     # End conditional
-    RPS1+="%B%F{blue}%1~%f%b"     # Show current directory
-    RPS1+="%f%k"                  # End colors
-  else
-    PS1=
-    PS1+="%B%n%b@%B%m%b"          # Show user@hostname
-    PS1+="> "                     # Right arrow
-
-    RPS1=
-    RPS1+="%(?.."                 # Start conditional (nonzero exit code)
-    RPS1+="%B%F{red}%?%f%b"       #   Show exit code in red
-    RPS1+=" | "                   #   Vertical bar spacer
-    RPS1+=")"                     # End conditional
-    RPS1+="%B%F{blue}%~%f%b"      # Show current directory
-  fi
+  print -n "%K{$prompt_bg}"
+  print -n "%F{$prompt_fg}"
 }
+
+prompt_l_sep ()
+{
+  print -n "%f"
+  print -n "%F{$prompt_mg}"
+  print -n " \uE0B1 "
+  print -n "%f"
+  print -n "%F{$prompt_fg}"
+  print -n " "
+}
+
+prompt_l_end ()
+{
+  print -n "%f"
+  print -n "%k"
+  print -n "%F{$prompt_bg}"
+  print -n "\uE0B0"
+  print -n "%f"
+  print -n " "
+}
+
+prompt_l ()
+{
+  prompt_l_begin
+  print -n "%B%n%b"
+  print -n "@"
+  print -n "%B%m%b"
+  prompt_l_end
+}
+
+prompt_r_begin ()
+{
+  print -n "%F{$prompt_bg}"
+  print -n "\uE0B2"
+  print -n "%f"
+  print -n "%K{$prompt_bg}"
+  print -n "%F{$prompt_fg}"
+}
+
+prompt_r_sep ()
+{
+  print -n "%f"
+  print -n "%F{$prompt_mg}"
+  print -n " \uE0B3 "
+  print -n "%f"
+  print -n "%F{$prompt_fg}"
+}
+
+prompt_r_end ()
+{
+  print -n "%f"
+  print -n "%k"
+}
+
+prompt_r ()
+{
+  prompt_r_begin
+
+  # Show error code
+  print -n "%B"
+  print -n "%("
+  print -n "?"
+  print -n ".%F{$prompt_ok}\xE2\x9C\x94%f"
+  print -n ".%F{$prompt_err}%?%f"
+  print -n ")"
+  print -n "%b"
+  prompt_r_sep
+
+  # Show directory
+  print -n "%B%F{$prompt_dir}"
+  print -n "%1~ "
+  print -n "%b%f"
+
+  prompt_r_end
+}
+
+set_prompt_fancy ()
+{
+  PS1="$(prompt_l)"
+  RPS1="$(prompt_r)"
+}
+
+
+##
+## Simple prompt
+##
+
+set_prompt_simple ()
+{
+  PS1='%B%n%b@%B%m%b%# '
+  RPS1='%(?..%B%?%b | )%1~'
+}
+
+
+# Choose prompt dynamically
+case "$TERM" in
+  konsole)  set_prompt_fancy;;
+  *)        set_prompt_simple;;
+esac
 
