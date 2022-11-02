@@ -31,7 +31,7 @@ function ()
     RPS1+="%B%F{red}%?%f%b"       #   Show exit code in red
     RPS1+=" %F{$middle}$bar%f "   #   Vertical bar spacer
     RPS1+=")"                     # End conditional
-    RPS1+="%B%F{blue}%~ %f%b"     # Show current directory
+    RPS1+="%B%F{blue}%1~%f%b"     # Show current directory
     RPS1+="%f%k"                  # End colors
   else
     PS1=
