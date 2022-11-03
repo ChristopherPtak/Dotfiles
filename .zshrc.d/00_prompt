@@ -12,8 +12,8 @@ function ()
 
   if [ -n "$fancy" ]
   then
-    PS1='%K{#414359}%F{#C2C2C2}%B%n%b@%B%m%b%f%k%F{#414359}%f '
-    RPS1='%F{#414359}%f%K{#414359}%F{#C2C2C2}%B%(?.%F{#16A085}✔%f.%F{#E11A1A}%?%f)%b%f%F{#8D8D8D}  %f%F{#C2C2C2}%B%F{#3DAEE9}%1~ %b%f%f%k'
+    PS1='%K{#414359}%F{#C2C2C2} %B%n%b@%B%m%b %f%k%F{#414359}%f '
+    RPS1='%F{#414359}%f%K{#414359}%F{#C2C2C2} %B%(?.%F{#16A085}✔%f.%F{#E11A1A}%? ✖%f)%b%f%F{#8D8D8D}  %f%F{#C2C2C2}%B%F{#3DAEE9}%1~ %b%f %f%k'
   else
     PS1='%B%n%b@%B%m%b%# '
     RPS1='%(?..%B%?%b | )%1~'

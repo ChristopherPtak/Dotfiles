@@ -12,6 +12,7 @@ prompt_l_begin ()
 {
   print -n "%K{$prompt_bg}"
   print -n "%F{$prompt_fg}"
+  print -n " "
 }
 
 prompt_l_sep ()
@@ -26,6 +27,7 @@ prompt_l_sep ()
 
 prompt_l_end ()
 {
+  print -n " "
   print -n "%f"
   print -n "%k"
   print -n "%F{$prompt_bg}"
@@ -50,6 +52,7 @@ prompt_r_begin ()
   print -n "%f"
   print -n "%K{$prompt_bg}"
   print -n "%F{$prompt_fg}"
+  print -n " "
 }
 
 prompt_r_sep ()
@@ -63,6 +66,7 @@ prompt_r_sep ()
 
 prompt_r_end ()
 {
+  print -n " "
   print -n "%f"
   print -n "%k"
 }
@@ -76,7 +80,7 @@ prompt_r ()
   print -n "%("
   print -n "?"
   print -n ".%F{$prompt_ok}\xE2\x9C\x94%f"
-  print -n ".%F{$prompt_err}%?%f"
+  print -n ".%F{$prompt_err}%? \xE2\x9C\x96%f"
   print -n ")"
   print -n "%b"
   prompt_r_sep
