@@ -1,119 +1,22 @@
-#!/bin/zsh
 
-##
-## Fancy prompt
-##
+############################################
+## AUTOMATICALLY GENERATED -- DO NOT EDIT ##
+############################################
 
-prompt_fg='#C2C2BC'
-prompt_bg='#414359'
-prompt_mg='#8D8D8D'
-
-prompt_dir='#3DAEE9'
-prompt_err='#E11A1A'
-prompt_ok='#16A085'
-
-prompt_l_begin ()
+function ()
 {
-  print -n "%K{$prompt_bg}"
-  print -n "%F{$prompt_fg}"
+  case "$TERM" in
+    konsole)  fancy=1;;
+    *)        fancy=;;
+  esac
+
+  if [ -n "$fancy" ]
+  then
+    PS1='%K{#414359}%F{#C2C2C2}%B%n%b@%B%m%b%f%k%F{#414359}%f '
+    RPS1='%F{#414359}%f%K{#414359}%F{#C2C2C2}%B%(?.%F{#16A085}✔%f.%F{#E11A1A}%?%f)%b%f%F{#8D8D8D}  %f%F{#C2C2C2}%B%F{#3DAEE9}%1~ %b%f%f%k'
+  else
+    PS1='%B%n%b@%B%m%b%# '
+    RPS1='%(?..%B%?%b | )%1~'
+  fi
 }
-
-prompt_l_sep ()
-{
-  print -n "%f"
-  print -n "%F{$prompt_mg}"
-  print -n " \uE0B1 "
-  print -n "%f"
-  print -n "%F{$prompt_fg}"
-  print -n " "
-}
-
-prompt_l_end ()
-{
-  print -n "%f"
-  print -n "%k"
-  print -n "%F{$prompt_bg}"
-  print -n "\uE0B0"
-  print -n "%f"
-  print -n " "
-}
-
-prompt_l ()
-{
-  prompt_l_begin
-  print -n "%B%n%b"
-  print -n "@"
-  print -n "%B%m%b"
-  prompt_l_end
-}
-
-prompt_r_begin ()
-{
-  print -n "%F{$prompt_bg}"
-  print -n "\uE0B2"
-  print -n "%f"
-  print -n "%K{$prompt_bg}"
-  print -n "%F{$prompt_fg}"
-}
-
-prompt_r_sep ()
-{
-  print -n "%f"
-  print -n "%F{$prompt_mg}"
-  print -n " \uE0B3 "
-  print -n "%f"
-  print -n "%F{$prompt_fg}"
-}
-
-prompt_r_end ()
-{
-  print -n "%f"
-  print -n "%k"
-}
-
-prompt_r ()
-{
-  prompt_r_begin
-
-  # Show error code
-  print -n "%B"
-  print -n "%("
-  print -n "?"
-  print -n ".%F{$prompt_ok}\xE2\x9C\x94%f"
-  print -n ".%F{$prompt_err}%?%f"
-  print -n ")"
-  print -n "%b"
-  prompt_r_sep
-
-  # Show directory
-  print -n "%B%F{$prompt_dir}"
-  print -n "%1~ "
-  print -n "%b%f"
-
-  prompt_r_end
-}
-
-set_prompt_fancy ()
-{
-  PS1="$(prompt_l)"
-  RPS1="$(prompt_r)"
-}
-
-
-##
-## Simple prompt
-##
-
-set_prompt_simple ()
-{
-  PS1='%B%n%b@%B%m%b%# '
-  RPS1='%(?..%B%?%b | )%1~'
-}
-
-
-# Choose prompt dynamically
-case "$TERM" in
-  konsole)  set_prompt_fancy;;
-  *)        set_prompt_simple;;
-esac
 

@@ -2,7 +2,7 @@
 
 set -e
 
-changed=0
+changed=
 
 install_file ()
 {
@@ -48,6 +48,12 @@ fi
 
 if [ -f "/bin/zsh" ]
 then
+  if [ "generators/prompt" -nt ".zshrc.d/00_prompt" ]
+  then
+    echo 'Prompt configuration is out of date, rebuilding'
+    ./generators/prompt
+  fi
+
   # Install zsh configuration
   require_dir "$HOME/.zshrc.d"
   install_file ".zshrc"
