@@ -89,6 +89,7 @@ then
   # Plugins
   require_dir "$HOME/.local/bin"
   install_file ".local/bin/git-amend"
+  install_file ".local/bin/git-statusbar"
 else
   echo 'Git not installed, skipping'
 fi

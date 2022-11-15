@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# Make sure we are in a git repo
+git rev-parse 2>/dev/null || exit 0
+
+
+# Output branch name
+branch_name="$(git branch --show-current)"
+printf '%s' "$branch_name"
+
+
+changes="$(git status -s)"
+
+# Check how many files were changed/modified
+num_added=$(echo "$changes" | grep '^++' | wc -l)
+if [ "$num_added" != 0 ]
+then
+  printf ' +%s' "$num_added"
+fi
+
+# Check how many files were deleted
+num_deleted=$(echo "$changes" | grep '^--' | wc -l)
+if [ "$num_deleted" != 0 ]
+then
+  printf ' -%s' "$num_deleted"
+fi
+
+# Check how many remaining files there are
+num_untracked=$(echo "$changes" | grep '^??' | wc -l)
+if [ "$num_untracked" != 0 ]
+then
+  printf ' ?%s' "$num_untracked"
+fi
+
+
+# Finish the line
+printf '\n'
+
