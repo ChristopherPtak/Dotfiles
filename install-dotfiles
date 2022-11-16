@@ -41,6 +41,15 @@ fi
 # Install vim configuration
 if [ -f "/bin/vim" ]
 then
+
+  require_dir "$HOME/.vim/autoload"
+  if [ ! -f "$HOME/.vim/autoload/plug.vim" ]
+  then
+    echo 'Downloading Vim-Plug'
+    curl -sS -o "$HOME/.vim/autoload/plug.vim" \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  fi
+
   install_file ".vimrc"
 else
   echo 'Vim not installed, skipping'
