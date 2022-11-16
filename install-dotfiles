@@ -41,8 +41,9 @@ fi
 # Install vim configuration
 if [ -f "/bin/vim" ]
 then
-
+  require_dir "$HOME/.vim"
   require_dir "$HOME/.vim/autoload"
+
   if [ ! -f "$HOME/.vim/autoload/plug.vim" ]
   then
     echo 'Downloading Vim-Plug'
@@ -51,6 +52,16 @@ then
   fi
 
   install_file ".vimrc"
+
+  require_dir "$HOME/.vim/after"
+
+  require_dir "$HOME/.vim/after/ftplugin"
+  install_file ".vim/after/ftplugin/c.vim"
+  
+
+  require_dir "$HOME/.vim/plugin"
+  install_file ".vim/plugin/catppuccin.vim"
+  install_file ".vim/plugin/lightline.vim"
 else
   echo 'Vim not installed, skipping'
 fi

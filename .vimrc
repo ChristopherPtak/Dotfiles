@@ -12,18 +12,23 @@ Plug 'tpope/vim-commentary', {'as': 'commentary'}
 
 call plug#end()
 
+function! IsPluginInstalled(name)
+    return has_key(g:plugs, a:name) && isdirectory(g:plugs[a:name].dir)
+endfunction
+
 
 " Set indentation and syntax
 
-filetype indent off
 syntax on
 
-set tabstop=8
+filetype indent off
+
 set expandtab
+set tabstop=8
 
 set nocindent
-set nosmartindent
 set noautoindent
+set nosmartindent
 
 
 " For ease of navigation
@@ -36,20 +41,4 @@ set whichwrap=h,l
 
 set number
 nnoremap <C-n> :set relativenumber!<CR>
-
-
-" Enable colorscheme with transparent background
-
-colorscheme catppuccin_mocha
-highlight Normal     guibg=NONE ctermbg=NONE
-highlight CursorLine guibg=NONE ctermbg=NONE
-highlight Comment    cterm=italic
-
-
-" Enable Lightline
-
-set noshowmode
-set laststatus=2
-
-let g:lightline = {'colorscheme': 'catppuccin_mocha'}
 
