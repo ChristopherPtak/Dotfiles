@@ -1,7 +1,13 @@
 #!/bin/zsh
 
-# Use directory colors
-eval "$(dircolors -b)"
+if [ "$(uname)" = "Darwin" ]
+then
+  # For MacOS compatibility
+  export COLORTERM=1
+else
+  # Use directory colors
+  eval "$(dircolors -b)"
+fi
 
 # Some aliases
 alias ls='ls --color=auto'
