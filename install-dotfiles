@@ -4,6 +4,16 @@ set -e
 
 changed=
 
+has_command ()
+{
+  if which "$1" >/dev/null
+  then
+    return 0
+  else
+    return 1
+  fi
+}
+
 install_file ()
 {
   src_file="$1"
@@ -30,16 +40,8 @@ require_dir ()
 }
 
 
-# Install GHCi configuration
-if [ -d "$HOME/.ghcup" ]
-then
-  install_file ".ghci"
-else
-  echo 'GHC not installed, skipping'
-fi
-
 # Install vim configuration
-if [ -f "/bin/vim" ]
+if has_command "vim"
 then
   require_dir "$HOME/.vim"
   require_dir "$HOME/.vim/autoload"
@@ -66,7 +68,7 @@ else
   echo 'Vim not installed, skipping'
 fi
 
-if [ -f "/bin/zsh" ]
+if has_command "zsh"
 then
   if [ "generators/prompt" -nt ".zshrc.d/00_prompt" ]
   then
@@ -101,7 +103,7 @@ else
 fi
 
 # Configure Git and install plugins
-if [ -f "/usr/bin/git" ]
+if has_command "git"
 then
   # Main configuration
   install_file ".gitconfig"
@@ -112,6 +114,14 @@ then
   install_file ".local/bin/git-statusbar"
 else
   echo 'Git not installed, skipping'
+fi
+
+# Install GHCi configuration
+if has_command "ghci"
+then
+  install_file ".ghci"
+else
+  echo 'GHC not installed, skipping'
 fi
 
 
