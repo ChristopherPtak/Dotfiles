@@ -59,6 +59,8 @@ then
 
   require_dir "$HOME/.vim/after/ftplugin"
   install_file ".vim/after/ftplugin/c.vim"
+  install_file ".vim/after/ftplugin/javascript.vim"
+  install_file ".vim/after/ftplugin/html.vim"
   
 
   require_dir "$HOME/.vim/plugin"
