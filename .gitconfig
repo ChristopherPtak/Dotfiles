@@ -11,3 +11,5 @@
 	algorithm = minimal
 	colorMoved = default
 	colorMovedWS = no
+[push]
+	default = current
