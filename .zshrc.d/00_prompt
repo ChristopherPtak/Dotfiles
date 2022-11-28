@@ -8,21 +8,17 @@ function ()
   if [ -n "$TERM_PROGRAM" ]
   then
     case "$TERM_PROGRAM" in
+      konsole)         fancy=1;;
       Apple_Terminal)  fancy=1;;
       iTerm.app)       fancy=1;;
-      *)               fancy=;;
-    esac
-  elif [ -n "$TERM" ]
-  then
-    case "$TERM" in
-      konsole)  fancy=1;;
-      *)        fancy=;;
+      PuTTY)           fancy=1;;
+      *)               fancy=0;;
     esac
   else
-    fancy=
+    fancy=0
   fi
 
-  if [ -n "$fancy" ]
+  if [ "$fancy" = "1" ]
   then
     PS1='%K{#414359}%F{#C2C2C2} %B%n%b@%B%m%b %f%k%F{#414359}%f '
     RPS1='%F{#414359}%f%K{#414359}%F{#C2C2C2} %B%(?.%F{#16A085}✔%f.%F{#E11A1A}%? ✖%f)%b%f%F{#8D8D8D}  %f%F{#C2C2C2}%B%F{#3DAEE9}%1~ %b%f %f%k'

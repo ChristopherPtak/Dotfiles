@@ -105,21 +105,17 @@ function ()
   if [ -n "\$TERM_PROGRAM" ]
   then
     case "\$TERM_PROGRAM" in
+      konsole)         fancy=1;;
       Apple_Terminal)  fancy=1;;
       iTerm.app)       fancy=1;;
-      *)               fancy=;;
-    esac
-  elif [ -n "\$TERM" ]
-  then
-    case "\$TERM" in
-      konsole)  fancy=1;;
-      *)        fancy=;;
+      PuTTY)           fancy=1;;
+      *)               fancy=0;;
     esac
   else
-    fancy=
+    fancy=0
   fi
 
-  if [ -n "\$fancy" ]
+  if [ "\$fancy" = "1" ]
   then
     PS1='$(prompt_l)'
     RPS1='$(prompt_r)'
