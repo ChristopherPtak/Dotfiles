@@ -13,3 +13,4 @@
 	colorMovedWS = no
 [push]
 	default = current
+	autoSetupRemote = true
