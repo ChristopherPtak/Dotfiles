@@ -10,6 +10,9 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}
 " Editing shortcuts
 Plug 'tpope/vim-commentary', {'as': 'commentary'}
 
+" Return to last edit when file opens
+Plug 'farmergreg/vim-lastplace', {'as': 'lastplace'}
+
 call plug#end()
 
 function! IsPluginInstalled(name)
