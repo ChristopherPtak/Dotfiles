@@ -33,6 +33,8 @@ set nocindent
 set noautoindent
 set nosmartindent
 
+set nowrap
+
 
 " For ease of navigation
 
